@@ -9,11 +9,14 @@ import main.Constant;
 import main.dto.User;
 
 public class UserDAO {
+    private Connection getConnection() throws SQLException, ClassNotFoundException {
+        Class.forName("com.mysql.cj.jdbc.Driver");
+        return DriverManager.getConnection(
+            Constant.getFullAddress(), Constant.MYSQL_USER.getContent(), null);
+    }
 
     public void add(User user) throws ClassNotFoundException, SQLException {
-        Class.forName("com.mysql.cj.jdbc.Driver");
-        Connection connection = DriverManager.getConnection(
-            Constant.getFullAddress(), Constant.MYSQL_USER.getContent(), null);
+        Connection connection = getConnection();
 
         PreparedStatement preparedStatement = connection.prepareStatement(
             "insert into users(id, name, password) values(?,?,?)"
@@ -30,10 +33,7 @@ public class UserDAO {
     }
 
     public User get(String id) throws SQLException, ClassNotFoundException {
-        Class.forName("com.mysql.cj.jdbc.Driver");
-        Connection connection = DriverManager.getConnection(
-            Constant.getFullAddress(), Constant.MYSQL_USER.getContent(), null);
-
+        Connection connection = getConnection();
         PreparedStatement preparedStatement = connection.prepareStatement(
             "select * from users where Id = ?"
         );
