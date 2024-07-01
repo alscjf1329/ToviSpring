@@ -1,18 +1,22 @@
 package main.dao;
 
 import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import main.Constant;
 import main.dto.User;
+import main.maker.SimpleConnectionMaker;
 
-public abstract class UserDAO {
-    public abstract Connection getConnection() throws SQLException, ClassNotFoundException;
+public class UserDAO {
+
+    private SimpleConnectionMaker simpleConnectionMaker;
+
+    public UserDAO() {
+        this.simpleConnectionMaker = new SimpleConnectionMaker();
+    }
 
     public void add(User user) throws ClassNotFoundException, SQLException {
-        Connection connection = getConnection();
+        Connection connection = simpleConnectionMaker.makeNewConnection();
 
         PreparedStatement preparedStatement = connection.prepareStatement(
             "insert into users(id, name, password) values(?,?,?)"
@@ -29,7 +33,7 @@ public abstract class UserDAO {
     }
 
     public User get(String id) throws SQLException, ClassNotFoundException {
-        Connection connection = getConnection();
+        Connection connection = simpleConnectionMaker.makeNewConnection();
         PreparedStatement preparedStatement = connection.prepareStatement(
             "select * from users where Id = ?"
         );
