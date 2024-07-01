@@ -8,12 +8,8 @@ import java.sql.SQLException;
 import main.Constant;
 import main.dto.User;
 
-public class UserDAO {
-    private Connection getConnection() throws SQLException, ClassNotFoundException {
-        Class.forName("com.mysql.cj.jdbc.Driver");
-        return DriverManager.getConnection(
-            Constant.getFullAddress(), Constant.MYSQL_USER.getContent(), null);
-    }
+public abstract class UserDAO {
+    public abstract Connection getConnection() throws SQLException, ClassNotFoundException;
 
     public void add(User user) throws ClassNotFoundException, SQLException {
         Connection connection = getConnection();
