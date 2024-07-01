@@ -5,6 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import main.dto.User;
+import main.maker.DConnectionMaker;
 import main.maker.SimpleConnectionMaker;
 
 public class UserDAO {
@@ -12,11 +13,13 @@ public class UserDAO {
     private SimpleConnectionMaker simpleConnectionMaker;
 
     public UserDAO() {
-        this.simpleConnectionMaker = new SimpleConnectionMaker();
+        // 구체적인 클래스 정보가 드러남!!!
+        // N사의 ConnectionMaker는 사용하지 못함
+        this.simpleConnectionMaker = new DConnectionMaker();
     }
 
     public void add(User user) throws ClassNotFoundException, SQLException {
-        Connection connection = simpleConnectionMaker.makeNewConnection();
+        Connection connection = simpleConnectionMaker.makeConnection();
 
         PreparedStatement preparedStatement = connection.prepareStatement(
             "insert into users(id, name, password) values(?,?,?)"
@@ -33,7 +36,7 @@ public class UserDAO {
     }
 
     public User get(String id) throws SQLException, ClassNotFoundException {
-        Connection connection = simpleConnectionMaker.makeNewConnection();
+        Connection connection = simpleConnectionMaker.makeConnection();
         PreparedStatement preparedStatement = connection.prepareStatement(
             "select * from users where Id = ?"
         );
