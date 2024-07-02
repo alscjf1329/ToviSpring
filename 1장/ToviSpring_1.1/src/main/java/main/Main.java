@@ -3,11 +3,16 @@ package main;
 import java.sql.SQLException;
 import main.dto.User;
 import main.dao.UserDAO;
+import main.maker.DConnectionMaker;
+import main.maker.NConnectionMaker;
 
 public class Main {
 
     public static void main(String[] args) throws SQLException, ClassNotFoundException {
-        UserDAO userDAO = new UserDAO();
+        DConnectionMaker dConnectionMaker = new DConnectionMaker();
+        NConnectionMaker nConnectionMaker = new NConnectionMaker();
+
+        UserDAO userDAO = new UserDAO(dConnectionMaker);
 
         User user = new User();
         user.setId("sheepduck");

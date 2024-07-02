@@ -12,10 +12,8 @@ public class UserDAO {
 
     private SimpleConnectionMaker simpleConnectionMaker;
 
-    public UserDAO() {
-        // 구체적인 클래스 정보가 드러남!!!
-        // N사의 ConnectionMaker는 사용하지 못함
-        this.simpleConnectionMaker = new DConnectionMaker();
+    public UserDAO(SimpleConnectionMaker simpleConnectionMaker) {
+        this.simpleConnectionMaker = simpleConnectionMaker;
     }
 
     public void add(User user) throws ClassNotFoundException, SQLException {
