@@ -5,7 +5,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import main.dto.User;
-import main.maker.DConnectionMaker;
 import main.maker.SimpleConnectionMaker;
 
 public class UserDAO {

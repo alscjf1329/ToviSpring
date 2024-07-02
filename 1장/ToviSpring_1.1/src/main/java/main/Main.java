@@ -1,18 +1,15 @@
 package main;
 
 import java.sql.SQLException;
-import main.dto.User;
 import main.dao.UserDAO;
-import main.maker.DConnectionMaker;
-import main.maker.NConnectionMaker;
+import main.dto.User;
+import main.factory.DDAOFactory;
 
 public class Main {
 
     public static void main(String[] args) throws SQLException, ClassNotFoundException {
-        DConnectionMaker dConnectionMaker = new DConnectionMaker();
-        NConnectionMaker nConnectionMaker = new NConnectionMaker();
-
-        UserDAO userDAO = new UserDAO(dConnectionMaker);
+        UserDAO userDAO = new DDAOFactory().createUserDAO();
+//        UserDAO userDAO = new NDAOFactory().createUserDAO();
 
         User user = new User();
         user.setId("sheepduck");

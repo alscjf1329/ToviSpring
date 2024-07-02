@@ -1,13 +1,16 @@
 package main.maker;
 
 import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.SQLException;
+import main.Constant;
 
 public class DConnectionMaker implements SimpleConnectionMaker {
 
     @Override
     public Connection makeConnection() throws ClassNotFoundException, SQLException {
-        // D 사의 독자적인 방법으로 Connection을 생성하는 코드
-        return null;
+        Class.forName("com.mysql.cj.jdbc.Driver");
+        return DriverManager.getConnection(
+            Constant.getFullAddress(), Constant.MYSQL_USER.getContent(), null);
     }
 }
