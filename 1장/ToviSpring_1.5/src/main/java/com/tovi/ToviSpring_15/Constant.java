@@ -1,4 +1,5 @@
-package main;
+package com.tovi.ToviSpring_15;
+
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
