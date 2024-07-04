@@ -41,4 +41,4 @@ bin/
 ### Mac OS ###
 .DS_Store
 
-Constant
+/src/main/java/main/Constant.java
